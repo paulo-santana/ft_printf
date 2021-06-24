@@ -7,7 +7,7 @@ SRCS = ft_printf.c
 
 OBJS = ${SRCS:.c=.o}
 
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 
 CC = clang ${CFLAGS}
 

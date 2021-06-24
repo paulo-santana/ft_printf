@@ -25,6 +25,14 @@ static char	*char_to_str(int c)
 	return (str);
 }
 
+static char	*int_to_pointer(ssize_t nbr)
+{
+	char	*hex;
+
+	hex = ft_itox(nbr);
+	return (ft_strjoin("0x", hex));
+}
+
 static char	*get_str(char converter, va_list ap)
 {
 	char	*str;
@@ -34,6 +42,8 @@ static char	*get_str(char converter, va_list ap)
 		str = char_to_str(va_arg(ap, int));
 	else if (converter == 's')
 		str = ft_strdup(va_arg(ap, char *));
+	else if (converter == 'p')
+		str = int_to_pointer(va_arg(ap, ssize_t));
 	else if (converter == 'd')
 		str = ft_itoa(va_arg(ap, int));
 	else
