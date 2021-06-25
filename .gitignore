@@ -6,3 +6,4 @@ main.c
 printf-tester
 a.out
 .cache
+tests
