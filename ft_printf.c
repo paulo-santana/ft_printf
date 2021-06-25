@@ -28,9 +28,19 @@ static char	*char_to_str(int c)
 static char	*int_to_pointer(ssize_t nbr)
 {
 	char	*hex;
+	char	*address;
 
-	hex = ft_itox(nbr);
-	return (ft_strjoin("0x", hex));
+	if (nbr == 0)
+	{
+		address = ft_strdup("0x0");
+	}
+	else
+	{
+		hex = ft_itox(nbr);
+		address = ft_strjoin("0x", hex);
+		free(hex);
+	}
+	return (address);
 }
 
 static char	*get_str(char converter, va_list ap)
