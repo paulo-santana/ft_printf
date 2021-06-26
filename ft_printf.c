@@ -25,7 +25,7 @@ static char	*char_to_str(int c)
 	return (str);
 }
 
-static char	*int_to_pointer(ssize_t nbr)
+static char	*int_to_pointer(size_t nbr)
 {
 	char	*hex;
 	char	*address;
@@ -36,7 +36,7 @@ static char	*int_to_pointer(ssize_t nbr)
 	}
 	else
 	{
-		hex = ft_itox(nbr);
+		hex = ft_stox(nbr);
 		address = ft_strjoin("0x", hex);
 		free(hex);
 	}
@@ -53,7 +53,7 @@ static char	*get_str(char converter, va_list ap)
 	else if (converter == 's')
 		str = ft_strdup(va_arg(ap, char *));
 	else if (converter == 'p')
-		str = int_to_pointer(va_arg(ap, ssize_t));
+		str = int_to_pointer(va_arg(ap, size_t));
 	else if (converter == 'd')
 		str = ft_itoa(va_arg(ap, int));
 	else if (converter == 'i')
@@ -64,6 +64,8 @@ static char	*get_str(char converter, va_list ap)
 		str = ft_itox(va_arg(ap, unsigned int));
 	else if (converter == 'X')
 		str = ft_strtoupper(ft_itox(va_arg(ap, unsigned int)));
+	else if (converter == '%')
+		str = ft_strdup("%");
 	else
 		str = ft_strdup("");
 	return (str);
