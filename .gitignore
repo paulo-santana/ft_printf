@@ -7,3 +7,4 @@ printf-tester
 a.out
 .cache
 tests
+libftprintf.a
