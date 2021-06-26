@@ -58,6 +58,8 @@ static char	*get_str(char converter, va_list ap)
 		str = ft_itoa(va_arg(ap, int));
 	else if (converter == 'i')
 		str = ft_itoa(va_arg(ap, int));
+	else if (converter == 'u')
+		str = ft_itoa(va_arg(ap, int));
 	else
 		str = ft_strdup("");
 	return (str);
