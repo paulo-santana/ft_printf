@@ -62,6 +62,8 @@ static char	*get_str(char converter, va_list ap)
 		str = ft_uitoa(va_arg(ap, int));
 	else if (converter == 'x')
 		str = ft_itox(va_arg(ap, unsigned int));
+	else if (converter == 'X')
+		str = ft_strtoupper(ft_itox(va_arg(ap, unsigned int)));
 	else
 		str = ft_strdup("");
 	return (str);
