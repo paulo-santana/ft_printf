@@ -56,6 +56,8 @@ static char	*get_str(char converter, va_list ap)
 		str = int_to_pointer(va_arg(ap, ssize_t));
 	else if (converter == 'd')
 		str = ft_itoa(va_arg(ap, int));
+	else if (converter == 'i')
+		str = ft_itoa(va_arg(ap, int));
 	else
 		str = ft_strdup("");
 	return (str);
