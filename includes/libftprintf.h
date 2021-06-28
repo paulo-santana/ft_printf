@@ -13,11 +13,17 @@
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
+# include <stdarg.h>
+
 typedef struct s_param
 {
 	int		precision;
 	int		width;
 	char	*str;
+	int		minus;
+	int		zero;
 }			t_param;
+
+char	*get_str(char converter, va_list ap);
 
 #endif

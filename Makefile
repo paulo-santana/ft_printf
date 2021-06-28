@@ -1,11 +1,17 @@
 NAME = libftprintf.a
 
+SRCS_DIR = ./src
+OBJS_DIR = ./obj
+
 LIBFT_DIR = libft
 LIBFT = ${LIBFT_DIR}/libft.a
 
-SRCS = ft_printf.c
+SRCS_FILES = ft_printf.c specifiers.c
 
-OBJS = ${SRCS:.c=.o}
+SRCS = ${addprefix ${SRCS_DIR}/, ${SRCS_FILES}}
+
+OBJS_FILES = ${SRCS_FILES:.c=.o}
+OBJS = ${addprefix ${OBJS_DIR}/, ${OBJS_FILES}}
 
 CFLAGS = -Wall -Werror -Wextra -g3 # -fsanitize=address
 
@@ -20,7 +26,7 @@ ${NAME}: ${LIBFT} ${OBJS}
 ${LIBFT}:
 	make -C ${LIBFT_DIR}
 
-%.o: %.c
+${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c
 	${CC} -I./includes -c $< -o $@
 
 clean:

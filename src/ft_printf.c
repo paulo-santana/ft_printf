@@ -12,78 +12,51 @@
 
 #include "libft.h"
 #include "libftprintf.h"
-#include <stdarg.h>
-
-static char	*char_to_str(int c)
-{
-	char	*str;
-
-	str = ft_calloc(2, sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	str[0] = (char)c;
-	return (str);
-}
-
-static char	*int_to_pointer(size_t nbr)
-{
-	char	*hex;
-	char	*address;
-
-	if (nbr == 0)
-	{
-		address = ft_strdup("0x0");
-	}
-	else
-	{
-		hex = ft_stox(nbr);
-		address = ft_strjoin("0x", hex);
-		free(hex);
-	}
-	return (address);
-}
-
-static char	*get_str(char converter, va_list ap)
-{
-	char	*str;
-
-	str = NULL;
-	if (converter == 'c')
-		str = char_to_str(va_arg(ap, int));
-	else if (converter == 's')
-		str = ft_strdup(va_arg(ap, char *));
-	else if (converter == 'p')
-		str = int_to_pointer(va_arg(ap, size_t));
-	else if (converter == 'd')
-		str = ft_itoa(va_arg(ap, int));
-	else if (converter == 'i')
-		str = ft_itoa(va_arg(ap, int));
-	else if (converter == 'u')
-		str = ft_uitoa(va_arg(ap, unsigned int));
-	else if (converter == 'x')
-		str = ft_itox(va_arg(ap, unsigned int));
-	else if (converter == 'X')
-		str = ft_strtoupper(ft_itox(va_arg(ap, unsigned int)));
-	else if (converter == '%')
-		str = ft_strdup("%");
-	else
-		str = ft_strdup("");
-	return (str);
-}
 
 static int	is_flag(char c)
 {
 	return (c == '0' || c == '-' || c == '*');
 }
 
+/**
+ * Fetches all the data related to the current param to be printed
+ * */
+
+static void	get_flags(const char *str, t_param *param, va_list ap)
+{
+	char	*flags;
+
+	(void) ap;
+	if (!*str)
+		return ;
+	flags = "-0.*";
+	while (is_flag(*str))
+	{
+		if (*str == '-')
+			param->minus = 1;
+		else if (*str == '0')
+			param->zero = 1;
+		str++;
+	}
+}
+
+static int	get_width(const char *str)
+{
+	int	width;
+
+	width = ft_atoi(str);
+	return (width);
+}
+
 static t_param	get_data(const char **str, int pos, va_list ap)
 {
 	t_param	param;
 
+	get_flags(*str + pos, &param, ap);
 	if (is_flag((*str)[pos]))
-		pos++;
+		(*str)++;
 	param.str = get_str((*str)[pos], ap);
-	param.width = 0;
+	param.width = get_width((*str) + pos);
 	param.precision = 0;
 	return (param);
 }
