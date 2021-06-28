@@ -19,25 +19,32 @@ static int	is_flag(char c)
 }
 
 /**
- * Fetches all the data related to the current param to be printed
+ * Fetches all the data related to the current param to be printed based on the
+ * placeholder.
+ * Returns the amount of characters that were related to the param in case of
+ * valid flags.
  * */
 
-static void	get_flags(const char *str, t_param *param, va_list ap)
+static int	get_flags(const char *str, t_param *param, va_list ap)
 {
 	char	*flags;
+	int		chars;
 
 	(void) ap;
 	if (!*str)
-		return ;
+		return (0);
 	flags = "-0.*";
-	while (is_flag(*str))
+	chars = 0;
+	str++;
+	while (is_flag(str[chars]))
 	{
-		if (*str == '-')
+		if (str[chars] == '-')
 			param->minus = 1;
-		else if (*str == '0')
+		else if (str[chars] == '0')
 			param->zero = 1;
-		str++;
+		chars++;
 	}
+	return (chars);
 }
 
 static int	get_width(const char *str)
@@ -48,15 +55,14 @@ static int	get_width(const char *str)
 	return (width);
 }
 
-static t_param	get_data(const char **str, int pos, va_list ap)
+static t_param	get_data(const char *str, va_list ap)
 {
 	t_param	param;
+	int		offset;
 
-	get_flags(*str + pos, &param, ap);
-	if (is_flag((*str)[pos]))
-		(*str)++;
-	param.str = get_str((*str)[pos], ap);
-	param.width = get_width((*str) + pos);
+	offset = get_flags(str, &param, ap);
+	param.width = get_width(str + offset);
+	param.str = get_str(str[offset], ap);
 	param.precision = 0;
 	return (param);
 }
@@ -65,39 +71,43 @@ static t_param	get_data(const char **str, int pos, va_list ap)
  * (flag, width, .precision, length e type) e gera os metadados necessarios 
  * para escrita na tela. */
 
-static int	print_placeholder(const char **format, int pos, va_list ap)
+static int	print_placeholder(const char **format, va_list ap)
 {
-	char	param_type;
 	t_param	param;
 	int		chars_printed;
 
-	param_type = (*format)[pos + 1];
-	param = get_data(format, pos + 1, ap);
+	param = get_data(*format + 1, ap);
 	ft_putstr_fd(param.str, 1);
-	(*format)++;
 	chars_printed = ft_strlen(param.str);
 	free(param.str);
 	return (chars_printed);
-	return (0);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	int		i;
-	int		chars_printed;
-	va_list	ap;
+	int			i;
+	int			chars_printed;
+	va_list		ap;
+	const char	*str;
+	const char	*next_spec;
 
 	i = 0;
 	chars_printed = 0;
 	va_start(ap, format);
-	while (format[i])
+	str = format;
+	while (str)
 	{
-		if (format[i] == '%')
-			chars_printed += print_placeholder(&format, i++, ap);
+		next_spec = ft_strchr(str, '%');
+		if (next_spec)
+		{
+			write(1, str, next_spec - str);
+			print_placeholder(&next_spec, ap);
+			str = next_spec + 1;
+		}
 		else
 		{
-			ft_putchar_fd(format[i++], 1);
-			chars_printed++;
+			ft_putstr_fd((char *)str, 1);
+			break ;
 		}
 	}
 	return (chars_printed);
