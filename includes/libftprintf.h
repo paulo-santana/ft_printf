@@ -14,6 +14,7 @@
 # define LIBFTPRINTF_H
 
 # include <stdarg.h>
+# include <unistd.h>
 
 typedef struct s_param
 {
@@ -22,6 +23,7 @@ typedef struct s_param
 	char	*str;
 	int		minus;
 	int		zero;
+	size_t	placeholder_len;
 }			t_param;
 
 char	*get_str(char converter, va_list ap);

@@ -29,6 +29,10 @@ ${LIBFT}:
 ${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c
 	${CC} -I./includes -c $< -o $@
 
+test: ${NAME}
+	${CC} main.c -L./ -lftprintf
+	./a.out
+
 clean:
 	make -C ${LIBFT_DIR} clean
 	${RM} ${OBJS}
