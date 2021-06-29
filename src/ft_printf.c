@@ -80,6 +80,7 @@ static int	print_placeholder(const char **format, va_list ap)
 	ft_putstr_fd(param.str, 1);
 	chars_printed = ft_strlen(param.str);
 	free(param.str);
+	(*format)++;
 	return (chars_printed);
 }
 
