@@ -15,6 +15,7 @@
 
 # include <stdarg.h>
 # include <unistd.h>
+# include "libft.h"
 
 typedef struct s_param
 {
@@ -27,5 +28,6 @@ typedef struct s_param
 }			t_param;
 
 char	*get_str(char converter, va_list ap);
+int		print_param(t_param *param);
 
 #endif

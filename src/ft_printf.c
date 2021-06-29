@@ -35,7 +35,6 @@ static int	get_flags(const char *str, t_param *param, va_list ap)
 		return (0);
 	flags = "-0.*";
 	chars = 0;
-	str++;
 	while (is_flag(str[chars]))
 	{
 		if (str[chars] == '-')
@@ -47,11 +46,11 @@ static int	get_flags(const char *str, t_param *param, va_list ap)
 	return (chars);
 }
 
-static int	get_width(const char **str)
+static int	get_width(const char *str)
 {
 	int	width;
 
-	width = ft_atoi(*str);
+	width = ft_atoi(str);
 	return (width);
 }
 
@@ -62,8 +61,8 @@ static t_param	get_data(const char *str, va_list ap)
 
 	param.placeholder_len = 1;
 	offset = get_flags(str, &param, ap);
-	param.width = get_width(&str + offset);
-	while (ft_isdigit(*(str + offset)))
+	param.width = get_width(str + offset);
+	while (ft_isdigit(str[offset]))
 		offset++;
 	param.str = get_str(str[offset], ap);
 	param.precision = 0;
@@ -76,16 +75,15 @@ static t_param	get_data(const char *str, va_list ap)
  * para escrita na tela. */
 
 static int	print_placeholder(const char **format, va_list ap,
-		int *chars_printed)
+		int *total_chars)
 {
 	t_param	param;
-	int		len;
+	int		chars_printed;
 
 	param = get_data(*format + 1, ap);
-	ft_putstr_fd(param.str, 1);
-	len = ft_strlen(param.str);
+	chars_printed = print_param(&param);
 	free(param.str);
-	*chars_printed += len;
+	*total_chars += chars_printed;
 	*format = *format + param.placeholder_len;
 	return (0);
 }
