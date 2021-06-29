@@ -37,7 +37,8 @@ int	print_param(t_param *param)
 	len = ft_strlen(param->str);
 	if (len < param->width)
 	{
-		fill_str(param, len);
+		if (fill_str(param, len) < 0)
+			return (-1);
 		len = param->width;
 	}
 	write (1, param->str, len);
