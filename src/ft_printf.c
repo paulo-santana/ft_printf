@@ -92,26 +92,27 @@ int	ft_printf(const char *format, ...)
 {
 	int			chars_printed;
 	va_list		ap;
-	const char	*str;
 	const char	*next_spec;
 
 	chars_printed = 0;
 	va_start(ap, format);
-	str = format;
-	while (str)
+	while (format)
 	{
-		next_spec = ft_strchr(str, '%');
+		next_spec = ft_strchr(format, '%');
 		if (next_spec)
 		{
-			write(1, str, next_spec - str);
+			write(1, format, next_spec - format);
+			chars_printed += next_spec - format;
 			print_placeholder(&next_spec, ap, &chars_printed);
-			str = next_spec + 1;
+			format = next_spec + 1;
 		}
 		else
 		{
-			ft_putstr_fd((char *)str, 1);
+			ft_putstr_fd((char *)format, 1);
+			chars_printed += ft_strlen(format);
 			break ;
 		}
 	}
+	va_end(ap);
 	return (chars_printed);
 }
