@@ -74,8 +74,7 @@ static t_param	get_data(const char *str, va_list ap)
  * (flag, width, .precision, length e type) e gera os metadados necessarios 
  * para escrita na tela. */
 
-static int	print_placeholder(const char **format, va_list ap,
-		int *total_chars)
+static int	print_placeholder(const char **format, va_list ap)
 {
 	t_param	param;
 	int		chars_printed;
@@ -83,9 +82,8 @@ static int	print_placeholder(const char **format, va_list ap,
 	param = get_data(*format + 1, ap);
 	chars_printed = print_param(&param);
 	free(param.str);
-	*total_chars += chars_printed;
 	*format = *format + param.placeholder_len;
-	return (0);
+	return (chars_printed);
 }
 
 int	ft_printf(const char *format, ...)
@@ -103,7 +101,7 @@ int	ft_printf(const char *format, ...)
 		{
 			write(1, format, next_spec - format);
 			chars_printed += next_spec - format;
-			print_placeholder(&next_spec, ap, &chars_printed);
+			chars_printed += print_placeholder(&next_spec, ap);
 			format = next_spec + 1;
 		}
 		else
