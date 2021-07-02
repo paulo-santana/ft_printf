@@ -54,6 +54,24 @@ static int	get_width(const char *str)
 	return (width);
 }
 
+static int	get_precision(const char *str, t_param *param, va_list ap)
+{
+	int	offset;
+
+	(void)ap;
+	param->has_precision = 0;
+	offset = 0;
+	if (*str++ == '.')
+	{
+		offset = 1;
+		param->has_precision = 1;
+		param->precision = ft_atoi(str);
+		while (ft_isdigit(*str++))
+			offset++;
+	}
+	return (offset);
+}
+
 static t_param	get_data(const char *str, va_list ap)
 {
 	t_param	param;
@@ -64,8 +82,8 @@ static t_param	get_data(const char *str, va_list ap)
 	param.width = get_width(str + offset);
 	while (ft_isdigit(str[offset]))
 		offset++;
+	offset += get_precision(str + offset, &param, ap);
 	param.str = get_str(str[offset], ap);
-	param.precision = 0;
 	param.placeholder_len += offset;
 	return (param);
 }

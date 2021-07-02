@@ -25,6 +25,7 @@ typedef struct s_param
 	int		minus;
 	int		zero;
 	size_t	placeholder_len;
+	int		has_precision;
 }			t_param;
 
 char	*get_str(char converter, va_list ap);
