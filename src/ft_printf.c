@@ -104,9 +104,9 @@ static int	print_placeholder(const char **format, va_list ap)
 
 	param = get_data(*format + 1, ap);
 	chars_printed = print_param(param);
+	*format = *format + param->placeholder_len;
 	free(param->str);
 	free(param);
-	*format = *format + param->placeholder_len;
 	return (chars_printed);
 }
 

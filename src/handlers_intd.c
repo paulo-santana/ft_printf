@@ -28,9 +28,9 @@ static int	fill_precision(t_param *param)
 		return (-1);
 	i = 0;
 	if (is_neg)
-		new_str[i++] = '-';
+		new_str[i] = '-';
 	while (i < param->precision - str_len + is_neg)
-		new_str[i++] = '0';
+		new_str[i++ + is_neg] = '0';
 	new_str[i + is_neg] = '\0';
 	ft_strlcat(new_str, param->str + is_neg, param->precision + 1 + is_neg);
 	free(param->str);
