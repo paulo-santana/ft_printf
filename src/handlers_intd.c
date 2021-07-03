@@ -21,7 +21,7 @@ static int	fill_precision(t_param *param)
 
 	is_neg = param->str[0] == '-';
 	str_len = ft_strlen(param->str);
-	if (str_len >= param->precision)
+	if (str_len >= param->precision + is_neg)
 		return (str_len);
 	new_str = malloc(param->precision + is_neg + 1);
 	if (new_str == NULL)
