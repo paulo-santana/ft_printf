@@ -6,7 +6,10 @@ OBJS_DIR = ./obj
 LIBFT_DIR = libft
 LIBFT = ${LIBFT_DIR}/libft.a
 
-SRCS_FILES = ft_printf.c specifiers.c output.c
+SRCS_FILES = ft_printf.c specifiers.c output.c handlers_string.c \
+			 handlers_char.c handlers_pointer.c handlers_intd.c \
+			 handlers_inti.c handlers_intu.c handlers_hex.c \
+			 handlers_hex_upper.c handlers_percentage.c
 
 SRCS = ${addprefix ${SRCS_DIR}/, ${SRCS_FILES}}
 

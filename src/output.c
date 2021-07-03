@@ -41,9 +41,6 @@ int	print_param(t_param *param)
 			return (-1);
 		len = param->width;
 	}
-	if (param->has_precision)
-		if (len > param->precision)
-			len = param->precision;
 	write (1, param->str, len);
 	return (len);
 }

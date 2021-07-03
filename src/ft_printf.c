@@ -83,7 +83,7 @@ static t_param	get_data(const char *str, va_list ap)
 	while (ft_isdigit(str[offset]))
 		offset++;
 	offset += get_precision(str + offset, &param, ap);
-	param.str = get_str(str[offset], ap);
+	get_str(str[offset], &param, ap);
 	param.placeholder_len += offset;
 	return (param);
 }
