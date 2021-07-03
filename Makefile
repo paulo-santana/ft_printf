@@ -23,6 +23,7 @@ CC = clang ${CFLAGS}
 all: ${NAME}
 
 ${NAME}: ${LIBFT} ${OBJS}
+	${RM} ${NAME}
 	cp ${LIBFT} ${NAME}
 	${AR} rcs ${NAME} ${OBJS}
 

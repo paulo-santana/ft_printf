@@ -27,22 +27,29 @@ static int	fill_precision(t_param *param)
 	i = 0;
 	new_str[param->precision] = '\0';
 	while (i < param->precision - str_len)
-		new_str[i] = '0';
+		new_str[i++] = '0';
 	new_str[i] = '\0';
-	ft_strlcat(new_str, param->str, param->precision);
+	ft_strlcat(new_str, param->str, param->precision + 1);
 	free(param->str);
 	param->str = new_str;
+	param->str_len = param->precision;
 	return (param->precision);
 }
 
 int	print_intd(t_param *param)
 {
 	if (param->has_precision)
-		fill_precision(param);
-	return (0);
+		if (fill_precision(param) < 0)
+			return (-1);
+	if (param->width > param->str_len)
+		if (fill_str(param) < 0)
+			return (-1);
+	ft_putstr_fd(param->str, 1);
+	return (param->str_len);
 }
 
 void	handle_intd(t_param *param, va_list ap)
 {
+	param->specifier = 'd';
 	param->str = ft_itoa(va_arg(ap, int));
 }

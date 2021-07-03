@@ -20,8 +20,9 @@
 typedef struct s_param
 {
 	int		precision;
-	int		width;
+	size_t	width;
 	char	*str;
+	size_t	str_len;
 	int		minus;
 	int		zero;
 	size_t	placeholder_len;
@@ -30,7 +31,6 @@ typedef struct s_param
 }			t_param;
 
 void	get_str(char converter, t_param *param, va_list ap);
-int		print_param(t_param *param);
 void	handle_char(t_param *param, va_list ap);
 void	handle_string(t_param *param, va_list ap);
 void	handle_pointer(t_param *param, va_list ap);
@@ -40,5 +40,10 @@ void	handle_intu(t_param *param, va_list ap);
 void	handle_hex(t_param *param, va_list ap);
 void	handle_hex_upper(t_param *param, va_list ap);
 void	handle_percentage(t_param *param);
+
+// output functions
+int		fill_str(t_param *param);
+int		print_param(t_param *param);
+int		print_intd(t_param *param);
 
 #endif

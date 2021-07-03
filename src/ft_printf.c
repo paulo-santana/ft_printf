@@ -72,19 +72,24 @@ static int	get_precision(const char *str, t_param *param, va_list ap)
 	return (offset);
 }
 
-static t_param	get_data(const char *str, va_list ap)
+static t_param	*get_data(const char *str, va_list ap)
 {
-	t_param	param;
+	t_param	*param;
 	int		offset;
 
-	param.placeholder_len = 1;
-	offset = get_flags(str, &param, ap);
-	param.width = get_width(str + offset);
+	param = ft_calloc(1, sizeof(t_param));
+	if (param == NULL)
+		return (NULL);
+	param->specifier = '\0';
+	param->placeholder_len = 1;
+	offset = get_flags(str, param, ap);
+	param->width = get_width(str + offset);
 	while (ft_isdigit(str[offset]))
 		offset++;
-	offset += get_precision(str + offset, &param, ap);
-	get_str(str[offset], &param, ap);
-	param.placeholder_len += offset;
+	offset += get_precision(str + offset, param, ap);
+	get_str(str[offset], param, ap);
+	param->str_len = ft_strlen(param->str);
+	param->placeholder_len += offset;
 	return (param);
 }
 
@@ -94,13 +99,14 @@ static t_param	get_data(const char *str, va_list ap)
 
 static int	print_placeholder(const char **format, va_list ap)
 {
-	t_param	param;
+	t_param	*param;
 	int		chars_printed;
 
 	param = get_data(*format + 1, ap);
-	chars_printed = print_param(&param);
-	free(param.str);
-	*format = *format + param.placeholder_len;
+	chars_printed = print_param(param);
+	free(param->str);
+	free(param);
+	*format = *format + param->placeholder_len;
 	return (chars_printed);
 }
 
