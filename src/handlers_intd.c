@@ -44,7 +44,7 @@ int	print_intd(t_param *param)
 	if (param->width > param->str_len)
 		if (fill_str(param) < 0)
 			return (-1);
-	ft_putstr_fd(param->str, 1);
+	write(1, param->str, param->str_len);
 	return (param->str_len);
 }
 
