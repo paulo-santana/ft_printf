@@ -12,7 +12,7 @@
 
 #include "libftprintf.h"
 
-int	fill_str(t_param *param)
+int	fill_width(t_param *param)
 {
 	char	*new_str;
 	int		i;
@@ -33,17 +33,11 @@ int	fill_str(t_param *param)
 
 int	print_param(t_param *param)
 {
-	size_t	len;
-
 	if (param->specifier == 'd')
 		return (print_intd(param));
-	len = ft_strlen(param->str);
-	if (len < param->width)
-	{
-		if (fill_str(param) < 0)
+	if (param->str_len < param->width)
+		if (fill_width(param) < 0)
 			return (-1);
-		len = param->width;
-	}
-	write (1, param->str, len);
-	return (len);
+	write (1, param->str, param->str_len);
+	return (param->str_len);
 }

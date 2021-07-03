@@ -42,7 +42,7 @@ void	handle_hex_upper(t_param *param, va_list ap);
 void	handle_percentage(t_param *param);
 
 // output functions
-int		fill_str(t_param *param);
+int		fill_width(t_param *param);
 int		print_param(t_param *param);
 int		print_intd(t_param *param);
 

@@ -42,7 +42,7 @@ int	print_intd(t_param *param)
 		if (fill_precision(param) < 0)
 			return (-1);
 	if (param->width > param->str_len)
-		if (fill_str(param) < 0)
+		if (fill_width(param) < 0)
 			return (-1);
 	write(1, param->str, param->str_len);
 	return (param->str_len);
