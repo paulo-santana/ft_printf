@@ -39,6 +39,10 @@ int	print_param(t_param *param)
 		return (print_inti(param));
 	if (param->specifier == 'u')
 		return (print_intu(param));
+	if (param->specifier == 'x')
+		return (print_intu(param));
+	if (param->specifier == 'X')
+		return (print_intu(param));
 	if (param->str_len < param->width)
 		if (fill_width(param) < 0)
 			return (-1);
