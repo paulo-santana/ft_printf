@@ -12,12 +12,25 @@
 
 #include "libftprintf.h"
 
+static int	handle_zero(t_param *param)
+{
+	if (param->str[0] == '0')
+	{
+		free(param->str);
+		param->str = ft_strdup("");
+		param->str_len = 0;
+	}
+	return (param->precision);
+}
+
 static int	fill_precision(t_param *param)
 {
 	int		i;
 	int		str_len;
 	char	*new_str;
 
+	if (param->precision == 0)
+		return (handle_zero(param));
 	str_len = ft_strlen(param->str);
 	if (str_len >= param->precision)
 		return (str_len);
