@@ -27,11 +27,12 @@ static int	fill_precision(t_param *param)
 	i = 0;
 	new_str[param->precision] = '\0';
 	while (i < param->precision - str_len)
-		new_str[i] = '0';
+		new_str[i++] = '0';
 	new_str[i] = '\0';
-	ft_strlcat(new_str, param->str, param->precision);
+	ft_strlcat(new_str, param->str, param->precision + 1);
 	free(param->str);
 	param->str = new_str;
+	param->str_len = param->precision;
 	return (param->precision);
 }
 
@@ -39,10 +40,15 @@ int	print_intu(t_param *param)
 {
 	if (param->has_precision)
 		fill_precision(param);
-	return (0);
+	if (param->width > param->str_len)
+		if (fill_width(param) < 0)
+			return (-1);
+	write(1, param->str, param->str_len);
+	return (param->str_len);
 }
 
 void	handle_intu(t_param *param, va_list ap)
 {
+	param->specifier = 'u';
 	param->str = ft_uitoa(va_arg(ap, int));
 }
