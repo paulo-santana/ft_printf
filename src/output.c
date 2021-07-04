@@ -35,6 +35,8 @@ int	print_param(t_param *param)
 {
 	if (param->specifier == 'd')
 		return (print_intd(param));
+	if (param->specifier == 'i')
+		return (print_inti(param));
 	if (param->str_len < param->width)
 		if (fill_width(param) < 0)
 			return (-1);

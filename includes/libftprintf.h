@@ -45,5 +45,6 @@ void	handle_percentage(t_param *param);
 int		fill_width(t_param *param);
 int		print_param(t_param *param);
 int		print_intd(t_param *param);
+int		print_inti(t_param *param);
 
 #endif
