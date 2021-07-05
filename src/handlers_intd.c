@@ -52,13 +52,38 @@ static int	fill_precision(t_param *param)
 	return (param->precision);
 }
 
+int	fill_int_width(t_param *param)
+{
+	size_t	i;
+	char	*new_str;
+	int		is_neg;
+
+	if (param->minus || !param->zero)
+		return (fill_width(param));
+	new_str = malloc(param->width + 1);
+	if (new_str == NULL)
+		return (-1);
+	is_neg = param->str[0] == '-';
+	i = 0;
+	if (is_neg)
+		new_str[0] = '-';
+	while (i < param->width - param->str_len)
+		new_str[i++ + is_neg] = '0';
+	new_str[i + is_neg] = '\0';
+	ft_strlcat(new_str, param->str + is_neg, param->width + 1);
+	free(param->str);
+	param->str = new_str;
+	param->str_len = param->width;
+	return (1);
+}
+
 int	print_intd(t_param *param)
 {
 	if (param->has_precision)
 		if (fill_precision(param) < 0)
 			return (-1);
 	if (param->width > param->str_len)
-		if (fill_width(param) < 0)
+		if (fill_int_width(param) < 0)
 			return (-1);
 	write(1, param->str, param->str_len);
 	return (param->str_len);

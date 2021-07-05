@@ -2,6 +2,7 @@ NAME = libftprintf.a
 
 SRCS_DIR = ./src
 OBJS_DIR = ./obj
+HEADERS_DIR = ./includes
 
 LIBFT_DIR = libft
 LIBFT = ${LIBFT_DIR}/libft.a
@@ -10,6 +11,9 @@ SRCS_FILES = ft_printf.c specifiers.c output.c handlers_string.c \
 			 handlers_char.c handlers_pointer.c handlers_intd.c \
 			 handlers_inti.c handlers_intu.c handlers_hex.c \
 			 handlers_hex_upper.c handlers_percentage.c
+
+HEADERS_FILES = libftprintf.h
+HEADERS = ${addprefix ${HEADERS_DIR}/, ${HEADERS_FILES}}
 
 SRCS = ${addprefix ${SRCS_DIR}/, ${SRCS_FILES}}
 
@@ -30,7 +34,7 @@ ${NAME}: ${LIBFT} ${OBJS}
 ${LIBFT}:
 	make -C ${LIBFT_DIR}
 
-${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c
+${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c ${HEADERS}
 	${CC} -I./includes -c $< -o $@
 
 test: ${NAME}
