@@ -25,6 +25,7 @@ typedef struct s_param
 	size_t	str_len;
 	int		minus;
 	int		zero;
+	char	filler;
 	size_t	placeholder_len;
 	int		has_precision;
 	char	specifier;

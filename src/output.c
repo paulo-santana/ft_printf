@@ -23,7 +23,7 @@ int	fill_width(t_param *param)
 	i = 0;
 	if (!param->minus)
 		while (i < (int)(param->width - param->str_len))
-			new_str[i++] = ' ';
+			new_str[i++] = param->filler;
 	new_str[i] = '\0';
 	ft_strlcat(new_str, param->str, param->width + 1);
 	i = param->str_len;
