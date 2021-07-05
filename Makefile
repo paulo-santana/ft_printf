@@ -34,7 +34,7 @@ ${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c
 	${CC} -I./includes -c $< -o $@
 
 test: ${NAME}
-	${CC} main.c -L./ -lftprintf
+	${CC} main.c -fsanitize=address -L./ -lftprintf
 	./a.out
 
 clean:

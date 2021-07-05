@@ -21,10 +21,18 @@ int	fill_width(t_param *param)
 	if (new_str == NULL)
 		return (-1);
 	i = 0;
-	while (i < (int)(param->width - param->str_len))
-		new_str[i++] = ' ';
+	if (!param->minus)
+		while (i < (int)(param->width - param->str_len))
+			new_str[i++] = ' ';
 	new_str[i] = '\0';
 	ft_strlcat(new_str, param->str, param->width + 1);
+	i = param->str_len;
+	if (param->minus)
+	{
+		while (i < (int)(param->width))
+			new_str[i++] = ' ';
+		new_str[i] = '\0';
+	}
 	free(param->str);
 	param->str = new_str;
 	param->str_len = param->width;
