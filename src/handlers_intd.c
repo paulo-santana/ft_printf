@@ -92,5 +92,7 @@ int	print_intd(t_param *param)
 void	handle_intd(t_param *param, va_list ap)
 {
 	param->specifier = 'd';
+	if (param->has_precision)
+		param->zero = 0;
 	param->str = ft_itoa(va_arg(ap, int));
 }

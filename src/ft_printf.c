@@ -27,13 +27,11 @@ static int	is_flag(char c)
 
 static int	get_flags(const char *str, t_param *param, va_list ap)
 {
-	char	*flags;
 	int		chars;
 
 	(void) ap;
 	if (!*str)
 		return (0);
-	flags = "-0.*";
 	chars = 0;
 	param->filler = ' ';
 	while (is_flag(str[chars]))

@@ -22,7 +22,7 @@ OBJS = ${addprefix ${OBJS_DIR}/, ${OBJS_FILES}}
 
 CFLAGS = -Wall -Werror -Wextra -g3 # -fsanitize=address
 
-CC = clang ${CFLAGS}
+CC = gcc ${CFLAGS}
 
 all: ${NAME}
 
