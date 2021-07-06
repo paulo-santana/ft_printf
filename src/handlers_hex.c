@@ -63,5 +63,7 @@ int	print_hex(t_param *param)
 void	handle_hex(t_param *param, va_list ap)
 {
 	param->specifier = 'x';
+	if (param->has_precision)
+		param->zero = 0;
 	param->str = ft_itox(va_arg(ap, unsigned int));
 }

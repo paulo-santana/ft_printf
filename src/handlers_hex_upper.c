@@ -15,5 +15,7 @@
 void	handle_hex_upper(t_param *param, va_list ap)
 {
 	param->specifier = 'X';
+	if (param->has_precision)
+		param->zero = 0;
 	param->str = ft_strtoupper(ft_itox(va_arg(ap, unsigned int)));
 }
