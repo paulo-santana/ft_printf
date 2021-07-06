@@ -58,7 +58,7 @@ int	print_inti(t_param *param)
 		if (fill_precision(param) < 0)
 			return (-1);
 	if (param->width > param->str_len)
-		if (fill_width(param) < 0)
+		if (fill_int_width(param) < 0)
 			return (-1);
 	write(1, param->str, param->str_len);
 	return (param->str_len);
@@ -67,5 +67,7 @@ int	print_inti(t_param *param)
 void	handle_inti(t_param *param, va_list ap)
 {
 	param->specifier = 'i';
+	if (param->has_precision)
+		param->zero = 0;
 	param->str = ft_itoa(va_arg(ap, int));
 }
