@@ -51,6 +51,7 @@ static int	get_flags(const char *str, t_param *param, va_list ap)
 static int	get_width(const char *str, t_param *param, va_list ap)
 {
 	int	width;
+	int	offset;
 
 	if (*str == '*')
 		width = va_arg(ap, int);
@@ -61,7 +62,14 @@ static int	get_width(const char *str, t_param *param, va_list ap)
 		width = -width;
 		param->minus = 1;
 	}
-	return (width);
+	param->width = width;
+	offset = 0;
+	if (*str == '*')
+		return (1);
+	else
+		while (ft_isdigit(*str++))
+			offset++;
+	return (offset);
 }
 
 static int	get_precision(const char *str, t_param *param, va_list ap)
@@ -93,12 +101,7 @@ static t_param	*get_data(const char *str, va_list ap)
 	param->specifier = '\0';
 	param->placeholder_len = 1;
 	offset = get_flags(str, param, ap);
-	param->width = get_width(str + offset, param, ap);
-	if (str[offset] == '*')
-		offset++;
-	else
-		while (ft_isdigit(str[offset]))
-			offset++;
+	offset += get_width(str + offset, param, ap);
 	offset += get_precision(str + offset, param, ap);
 	get_str(str[offset], param, ap);
 	param->str_len = ft_strlen(param->str);
