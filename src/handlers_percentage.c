@@ -12,6 +12,15 @@
 
 #include "libftprintf.h"
 
+int	print_percent(t_param *param)
+{
+	if (param->width > param->str_len)
+		if (fill_int_width(param) < 0)
+			return (-1);
+	write(1, param->str, param->str_len);
+	return (param->str_len);
+}
+
 void	handle_percentage(t_param *param)
 {
 	param->specifier = '%';

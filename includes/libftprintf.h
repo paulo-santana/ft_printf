@@ -49,5 +49,6 @@ int		print_param(t_param *param);
 int		print_intd(t_param *param);
 int		print_inti(t_param *param);
 int		print_intu(t_param *param);
+int		print_percent(t_param *param);
 
 #endif
