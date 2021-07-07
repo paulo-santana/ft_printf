@@ -48,7 +48,7 @@ static int	get_flags(const char *str, t_param *param, va_list ap)
 	return (chars);
 }
 
-static int	get_width(const char *str, va_list ap)
+static int	get_width(const char *str, t_param *param, va_list ap)
 {
 	int	width;
 
@@ -56,6 +56,11 @@ static int	get_width(const char *str, va_list ap)
 		width = va_arg(ap, int);
 	else
 		width = ft_atoi(str);
+	if (width < 0)
+	{
+		width = -width;
+		param->minus = 1;
+	}
 	return (width);
 }
 
@@ -88,7 +93,7 @@ static t_param	*get_data(const char *str, va_list ap)
 	param->specifier = '\0';
 	param->placeholder_len = 1;
 	offset = get_flags(str, param, ap);
-	param->width = get_width(str + offset, ap);
+	param->width = get_width(str + offset, param, ap);
 	if (str[offset] == '*')
 		offset++;
 	else
