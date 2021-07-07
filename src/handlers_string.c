@@ -18,6 +18,8 @@ void	handle_string(t_param *param, va_list ap)
 
 	param->specifier = 's';
 	str_param = va_arg(ap, char *);
+	if (str_param == NULL)
+		str_param = "(null)";
 	if (param->has_precision)
 		param->str = ft_substr(str_param, 0, param->precision);
 	else
