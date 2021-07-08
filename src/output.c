@@ -41,6 +41,8 @@ int	fill_width(t_param *param)
 
 int	print_param(t_param *param)
 {
+	if (param->specifier == 'c')
+		return (print_char(param));
 	if (param->specifier == 'd')
 		return (print_intd(param));
 	if (param->specifier == 'i')

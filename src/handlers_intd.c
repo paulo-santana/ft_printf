@@ -17,7 +17,7 @@ static int	handle_zero(t_param *param)
 	if (param->str[0] == '0')
 	{
 		free(param->str);
-		param->str = ft_strdup("");
+		param->str = ft_strdup("0");
 		param->str_len = 0;
 	}
 	return (param->precision);

@@ -23,6 +23,41 @@ static char	*char_to_str(int c)
 	return (str);
 }
 
+static int	fill_char_width(t_param *param)
+{
+	char	*new_str;
+	size_t	i;
+
+	new_str = malloc(param->width + 1);
+	if (new_str == NULL)
+		return (-1);
+	i = 0;
+	if (!param->minus)
+		while (i < param->width - 1)
+			new_str[i++] = ' ';
+	new_str[i] = param->str[0];
+	if (param->minus)
+	{
+		while (++i < param->width)
+			new_str[i] = ' ';
+		new_str[i] = '\0';
+	}
+	free(param->str);
+	param->str = new_str;
+	param->str_len = param->width;
+	return (1);
+}
+
+int	print_char(t_param *param)
+{
+	param->str_len = 1;
+	if (param->width > 1)
+		if (fill_char_width(param) < 0)
+			return (-1);
+	write(1, param->str, param->str_len);
+	return (param->str_len);
+}
+
 void	handle_char(t_param *param, va_list ap)
 {
 	param->specifier = 'c';
