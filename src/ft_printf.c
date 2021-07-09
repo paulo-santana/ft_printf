@@ -83,7 +83,11 @@ static int	get_precision(const char *str, t_param *param, va_list ap)
 		offset = 1;
 		param->has_precision = 1;
 		if (*str == '*')
+		{
 			param->precision = va_arg(ap, int);
+			if (param->precision < 0)
+				param->has_precision = 0;
+		}
 		else
 			param->precision = ft_atoi(str);
 		if (*str == '*')
