@@ -2,7 +2,7 @@ NAME = libftprintf.a
 
 SRCS_DIR = ./src
 OBJS_DIR = ./obj
-HEADERS_DIR = ./includes
+HEADERS_DIR = ./src
 
 LIBFT_DIR = libft
 LIBFT = ${LIBFT_DIR}/libft.a
@@ -32,6 +32,7 @@ ${NAME}: ${LIBFT} ${OBJS}
 	${AR} rcs ${NAME} ${OBJS}
 
 ${LIBFT}:
+	echo ${SRCS}
 	make -C ${LIBFT_DIR}
 
 ${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c ${HEADERS}
