@@ -76,16 +76,21 @@ static int	get_precision(const char *str, t_param *param, va_list ap)
 {
 	int	offset;
 
-	(void)ap;
 	param->has_precision = 0;
 	offset = 0;
 	if (*str++ == '.')
 	{
 		offset = 1;
 		param->has_precision = 1;
-		param->precision = ft_atoi(str);
-		while (ft_isdigit(*str++))
-			offset++;
+		if (*str == '*')
+			param->precision = va_arg(ap, int);
+		else
+			param->precision = ft_atoi(str);
+		if (*str == '*')
+			return (2);
+		else
+			while (ft_isdigit(*str++))
+				offset++;
 	}
 	return (offset);
 }
