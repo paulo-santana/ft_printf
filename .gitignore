@@ -9,3 +9,4 @@ a.out
 tests
 libftprintf.a
 ft_printf_tester
+printfTester/
