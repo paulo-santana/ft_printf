@@ -50,9 +50,9 @@ int	print_param(t_param *param)
 	if (param->specifier == 'u')
 		return (print_intu(param));
 	if (param->specifier == 'x')
-		return (print_intu(param));
+		return (print_hex(param));
 	if (param->specifier == 'X')
-		return (print_intu(param));
+		return (print_hex(param));
 	if (param->specifier == '%')
 		return (print_percent(param));
 	if (param->str_len < param->width)

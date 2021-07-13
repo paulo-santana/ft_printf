@@ -49,12 +49,52 @@ static int	fill_precision(t_param *param)
 	return (param->precision);
 }
 
+static int	fill_hex_width(t_param *param)
+{
+	size_t	i;
+	char	*new_str;
+	int		has_hash;
+
+	if (param->minus || !param->zero)
+		return (fill_width(param));
+	new_str = malloc(param->width + 1);
+	if (new_str == NULL)
+		return (-1);
+	has_hash = param->hash * 2;
+	i = 0;
+	if (has_hash)
+	{
+		new_str[0] = '0';
+		new_str[1] = param->specifier;
+	}
+	while (i < param->width - param->str_len)
+		new_str[i++ + has_hash] = '0';
+	new_str[i + has_hash] = '\0';
+	ft_strlcat(new_str, param->str + has_hash, param->width + 1);
+	free(param->str);
+	param->str = new_str;
+	param->str_len = param->width;
+	return (1);
+}
+
 int	print_hex(t_param *param)
 {
+	char	*tmp;
+
 	if (param->has_precision)
 		fill_precision(param);
+	if (param->hash)
+	{
+		tmp = param->str;
+		if (param->specifier == 'X')
+			param->str = ft_strjoin("0X", tmp);
+		else
+			param->str = ft_strjoin("0x", tmp);
+		param->str_len += 2;
+		free(tmp);
+	}
 	if (param->width > param->str_len)
-		if (fill_width(param) < 0)
+		if (fill_hex_width(param) < 0)
 			return (-1);
 	write(1, param->str, param->str_len);
 	return (param->str_len);
@@ -62,8 +102,13 @@ int	print_hex(t_param *param)
 
 void	handle_hex(t_param *param, va_list ap)
 {
+	unsigned int	nbr;
+
 	param->specifier = 'x';
 	if (param->has_precision)
 		param->zero = 0;
-	param->str = ft_itox(va_arg(ap, unsigned int));
+	nbr = va_arg(ap, unsigned int);
+	if (nbr == 0)
+		param->hash = 0;
+	param->str = ft_itox(nbr);
 }

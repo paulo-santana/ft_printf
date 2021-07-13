@@ -32,11 +32,12 @@ ${NAME}: ${LIBFT} ${OBJS}
 	${AR} rcs ${NAME} ${OBJS}
 
 ${LIBFT}:
-	echo ${SRCS}
 	make -C ${LIBFT_DIR}
 
 ${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c ${HEADERS}
 	${CC} -I./includes -c $< -o $@
+
+bonus: all
 
 test: ${NAME}
 	${CC} main.c -fsanitize=address -L./ -lftprintf

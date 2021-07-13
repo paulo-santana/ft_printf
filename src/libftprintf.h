@@ -25,6 +25,7 @@ typedef struct s_param
 	size_t	str_len;
 	int		minus;
 	int		zero;
+	int		hash;
 	char	filler;
 	size_t	placeholder_len;
 	int		has_precision;
@@ -51,6 +52,7 @@ int		print_char(t_param *param);
 int		print_intd(t_param *param);
 int		print_inti(t_param *param);
 int		print_intu(t_param *param);
+int		print_hex(t_param *param);
 int		print_percent(t_param *param);
 
 #endif
