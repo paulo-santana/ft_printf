@@ -79,12 +79,14 @@ int	fill_int_width(t_param *param)
 	return (1);
 }
 
-static void	prefix_positive(t_param *param)
+void	prefix_positive(t_param *param)
 {
 	char	*tmp;
 
 	tmp = param->str;
-	if (param->space)
+	if (param->plus)
+		param->str = ft_strjoin("+", tmp);
+	else if (param->space)
 		param->str = ft_strjoin(" ", tmp);
 	param->str_len++;
 	free(tmp);
@@ -95,7 +97,7 @@ int	print_intd(t_param *param)
 	if (param->has_precision)
 		if (fill_precision(param) < 0)
 			return (-1);
-	if (param->space && param->str[0] != '-')
+	if ((param->plus || param->space) && param->str[0] != '-')
 		prefix_positive(param);
 	if (param->width > param->str_len)
 		if (fill_int_width(param) < 0)

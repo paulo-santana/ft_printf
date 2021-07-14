@@ -27,6 +27,7 @@ typedef struct s_param
 	int		zero;
 	int		hash;
 	int		space;
+	int		plus;
 	char	filler;
 	size_t	placeholder_len;
 	int		has_precision;
@@ -48,6 +49,7 @@ void	handle_percentage(t_param *param);
 // output functions
 int		fill_width(t_param *param);
 int		fill_int_width(t_param *param);
+void	prefix_positive(t_param *param);
 int		print_param(t_param *param);
 int		print_char(t_param *param);
 int		print_intd(t_param *param);
