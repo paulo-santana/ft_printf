@@ -57,7 +57,7 @@ int	print_inti(t_param *param)
 	if (param->has_precision)
 		if (fill_precision(param) < 0)
 			return (-1);
-	if (param->space && param->str[0] != '-')
+	if ((param->plus || param->space) && param->str[0] != '-')
 		prefix_positive(param);
 	if (param->width > param->str_len)
 		if (fill_int_width(param) < 0)
