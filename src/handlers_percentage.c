@@ -14,9 +14,23 @@
 
 int	print_percent(t_param *param)
 {
+	size_t	i;
+
 	if (param->width > param->str_len)
-		if (fill_int_width(param) < 0)
+		if (fill_width(param) < 0)
 			return (-1);
+	if (param->zero)
+	{
+		i = 0;
+		while (i < param->str_len)
+		{
+			if (param->str[i] == ' ')
+				param->str[i] = '0';
+			if (param->str[i] == '%')
+				break ;
+			i++;
+		}
+	}
 	write(1, param->str, param->str_len);
 	return (param->str_len);
 }
