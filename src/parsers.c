@@ -14,7 +14,7 @@
 
 static int	is_flag(char c)
 {
-	return (c == '0' || c == '-' || c == '#');
+	return (c == '0' || c == '-' || c == '#' || c == ' ');
 }
 
 /**
@@ -44,6 +44,8 @@ static int	get_flags(const char *str, t_param *param, va_list ap)
 		}
 		else if (str[chars] == '#')
 			param->hash = 1;
+		else if (str[chars] == ' ')
+			param->space = 1;
 		chars++;
 	}
 	return (chars);

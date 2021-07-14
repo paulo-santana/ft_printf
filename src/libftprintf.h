@@ -26,6 +26,7 @@ typedef struct s_param
 	int		minus;
 	int		zero;
 	int		hash;
+	int		space;
 	char	filler;
 	size_t	placeholder_len;
 	int		has_precision;
