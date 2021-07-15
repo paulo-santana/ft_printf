@@ -39,6 +39,7 @@ typedef struct s_param	t_param;
 
 t_param	*get_data(const char *str, va_list ap);
 void	get_str(char converter, t_param *param, va_list ap);
+void	handle_binary(t_param *param, va_list ap);
 void	handle_char(t_param *param, va_list ap);
 void	handle_string(t_param *param, va_list ap);
 void	handle_pointer(t_param *param, va_list ap);

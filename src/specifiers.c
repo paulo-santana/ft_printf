@@ -15,7 +15,9 @@
 
 void	get_str(char converter, t_param *param, va_list ap)
 {
-	if (converter == 'c')
+	if (converter == 'b')
+		handle_binary(param, ap);
+	else if (converter == 'c')
 		handle_char(param, ap);
 	else if (converter == 's')
 		handle_string(param, ap);

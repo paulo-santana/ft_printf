@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stox.c                                          :+:      :+:    :+:   */
+/*   handlers_binary.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psergio- <psergio-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/24 14:53:39 by psergio-          #+#    #+#             */
-/*   Updated: 2021/06/26 15:32:07 by psergio-         ###   ########.fr       */
+/*   Created: 2021/07/14 23:53:02 by psergio-          #+#    #+#             */
+/*   Updated: 2021/07/14 23:53:02 by psergio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libftprintf.h"
+#include "libft.h"
 
-char	*ft_stox(size_t nbr)
+void	handle_binary(t_param *param, va_list ap)
 {
-	return (ft_stoa_base(nbr, "0123456789abcdef"));
+	size_t	nbr;
+
+	param->specifier = 'b';
+	if (param->has_precision)
+		param->zero = 0;
+	nbr = va_arg(ap, size_t);
+	if (nbr == 0)
+		param->hash = 0;
+	param->str = ft_stoa_base(nbr, "01");
 }
