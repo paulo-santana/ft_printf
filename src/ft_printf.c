@@ -13,10 +13,6 @@
 #include "libft.h"
 #include "libftprintf.h"
 
-/* TODO: criar funções que verificam cada parte do placeholder
- * (flag, width, .precision, length e type) e gera os metadados necessarios 
- * para escrita na tela. */
-
 static int	print_placeholder(const char **format, va_list ap)
 {
 	t_param	*param;
@@ -25,6 +21,12 @@ static int	print_placeholder(const char **format, va_list ap)
 	param = get_data(*format + 1, ap);
 	if (param == NULL)
 		return (-1);
+	if (param->error)
+	{
+		free(param->str);
+		free(param);
+		return (-1);
+	}
 	chars_printed = print_param(param);
 	*format = *format + param->placeholder_len;
 	free(param->str);

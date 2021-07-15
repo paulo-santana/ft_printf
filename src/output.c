@@ -44,7 +44,7 @@ int	print_param(t_param *param)
 	if (param->specifier == 'c')
 		return (print_char(param));
 	if (param->specifier == 'd')
-		return (print_intd(param));
+		return (print_int(param));
 	if (param->specifier == 'i')
 		return (print_inti(param));
 	if (param->specifier == 'u')

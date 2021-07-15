@@ -112,13 +112,17 @@ t_param	*get_data(const char *str, va_list ap)
 	param = ft_calloc(1, sizeof(t_param));
 	if (param == NULL)
 		return (NULL);
+	param->error = 0;
 	param->specifier = '\0';
 	param->placeholder_len = 1;
 	offset = get_flags(str, param, ap);
 	offset += get_width(str + offset, param, ap);
 	offset += get_precision(str + offset, param, ap);
 	get_str(str[offset], param, ap);
-	param->str_len = ft_strlen(param->str);
+	if (param->str == NULL)
+		return (param);
+	else
+		param->str_len = ft_strlen(param->str);
 	param->placeholder_len += offset;
 	return (param);
 }

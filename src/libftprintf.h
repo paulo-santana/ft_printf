@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <libft.h>
 
-typedef struct s_param
+struct s_param
 {
 	int		precision;
 	size_t	width;
@@ -32,7 +32,10 @@ typedef struct s_param
 	size_t	placeholder_len;
 	int		has_precision;
 	char	specifier;
-}			t_param;
+	int		error;
+};
+
+typedef struct s_param	t_param;
 
 t_param	*get_data(const char *str, va_list ap);
 void	get_str(char converter, t_param *param, va_list ap);
@@ -52,7 +55,7 @@ int		fill_int_width(t_param *param);
 void	prefix_positive(t_param *param);
 int		print_param(t_param *param);
 int		print_char(t_param *param);
-int		print_intd(t_param *param);
+int		print_int(t_param *param);
 int		print_inti(t_param *param);
 int		print_intu(t_param *param);
 int		print_hex(t_param *param);
