@@ -56,7 +56,7 @@ void	run_printers(const char *format, va_list ap, int *total_chars)
 		{
 			ft_putstr_fd((char *)format, 1);
 			*total_chars += ft_strlen(format);
-			break ;
+			format = NULL;
 		}
 	}
 }
