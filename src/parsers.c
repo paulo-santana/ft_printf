@@ -32,16 +32,12 @@ static int	get_flags(const char *str, t_param *param, va_list ap)
 	if (!*str)
 		return (0);
 	chars = 0;
-	param->filler = ' ';
 	while (is_flag(str[chars]))
 	{
 		if (str[chars] == '-')
 			param->minus = 1;
 		else if (str[chars] == '0')
-		{
 			param->zero = 1;
-			param->filler = '0';
-		}
 		else if (str[chars] == '#')
 			param->hash = 1;
 		else if (str[chars] == ' ')

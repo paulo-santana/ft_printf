@@ -28,7 +28,6 @@ struct s_param
 	int		hash;
 	int		space;
 	int		plus;
-	char	filler;
 	size_t	placeholder_len;
 	int		has_precision;
 	char	specifier;
