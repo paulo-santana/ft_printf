@@ -61,6 +61,15 @@ void	run_printers(const char *format, va_list ap, int *total_chars)
 	}
 }
 
+int	ft_vprintf(const char *format, va_list ap)
+{
+	int	chars_printed;
+
+	chars_printed = 0;
+	run_printers(format, ap, &chars_printed);
+	return (chars_printed);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	int			chars_printed;
@@ -68,7 +77,7 @@ int	ft_printf(const char *format, ...)
 
 	chars_printed = 0;
 	va_start(ap, format);
-	run_printers(format, ap, &chars_printed);
+	chars_printed = ft_vprintf(format, ap);
 	va_end(ap);
 	return (chars_printed);
 }
