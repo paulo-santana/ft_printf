@@ -62,4 +62,5 @@ void	handle_char(t_param *param, va_list ap)
 {
 	param->specifier = 'c';
 	param->str = char_to_str(va_arg(ap, int));
+	param->str_len = 1;
 }

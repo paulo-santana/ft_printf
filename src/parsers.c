@@ -117,7 +117,7 @@ t_param	*get_data(const char *str, va_list ap)
 	get_str(str[offset], param, ap);
 	if (param->str == NULL)
 		return (param);
-	else
+	if (param->specifier != 'c')
 		param->str_len = ft_strlen(param->str);
 	param->placeholder_len += offset;
 	return (param);

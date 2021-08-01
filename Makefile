@@ -52,6 +52,9 @@ fclean: clean
 	make -C ${LIBFT_DIR} fclean
 	${RM} ${NAME}
 
+run:
+	cd ./ft_printf_tester && sh test nosan m
+
 re: fclean all
 
 .PHONY: ${LIBFT}
