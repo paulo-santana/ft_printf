@@ -18,4 +18,7 @@ void	handle_intd(t_param *param, va_list ap)
 	if (param->has_precision)
 		param->zero = 0;
 	param->str = ft_itoa(va_arg(ap, int));
+	param->str_len = ft_strlen(param->str);
+	if (handle_flags_int(param) == -1)
+		param->error = 1;
 }

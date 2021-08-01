@@ -24,4 +24,5 @@ void	handle_binary(t_param *param, va_list ap)
 	if (nbr == 0)
 		param->hash = 0;
 	param->str = ft_stoa_base(nbr, "01");
+	param->str_len = ft_strlen(param->str);
 }

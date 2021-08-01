@@ -77,7 +77,7 @@ static int	fill_hex_width(t_param *param)
 	return (1);
 }
 
-int	print_hex(t_param *param)
+static int	handle_flags(t_param *param)
 {
 	char	*tmp;
 
@@ -96,7 +96,6 @@ int	print_hex(t_param *param)
 	if (param->width > param->str_len)
 		if (fill_hex_width(param) < 0)
 			return (-1);
-	write(1, param->str, param->str_len);
 	return (param->str_len);
 }
 
@@ -111,4 +110,7 @@ void	handle_hex(t_param *param, va_list ap)
 	if (nbr == 0)
 		param->hash = 0;
 	param->str = ft_itox(nbr);
+	param->str_len = ft_strlen(param->str);
+	if (handle_flags(param) == -1)
+		param->error = 1;
 }

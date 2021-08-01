@@ -23,7 +23,7 @@ static int	handle_zero(t_param *param)
 	return (param->precision);
 }
 
-static int	fill_precision(t_param *param)
+int	fill_precision(t_param *param)
 {
 	int		i;
 	int		str_len;
@@ -92,7 +92,7 @@ void	prefix_positive(t_param *param)
 	free(tmp);
 }
 
-int	print_int(t_param *param)
+int	handle_flags_int(t_param *param)
 {
 	if (param->has_precision)
 		if (fill_precision(param) < 0)
@@ -102,6 +102,5 @@ int	print_int(t_param *param)
 	if (param->width > param->str_len)
 		if (fill_int_width(param) < 0)
 			return (-1);
-	write(1, param->str, param->str_len);
 	return (param->str_len);
 }

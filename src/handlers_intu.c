@@ -56,7 +56,6 @@ int	print_intu(t_param *param)
 	if (param->width > param->str_len)
 		if (fill_int_width(param) < 0)
 			return (-1);
-	write(1, param->str, param->str_len);
 	return (param->str_len);
 }
 
@@ -66,4 +65,6 @@ void	handle_intu(t_param *param, va_list ap)
 	if (param->has_precision)
 		param->zero = 0;
 	param->str = ft_uitoa(va_arg(ap, int));
+	param->str_len = ft_strlen(param->str);
+	print_intu(param);
 }

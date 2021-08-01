@@ -17,7 +17,7 @@
 static int	print_placeholder(const char **format, va_list ap)
 {
 	t_param	*param;
-	int		chars_printed;
+	int		str_len;
 
 	param = get_data(*format + 1, ap);
 	if (param == NULL)
@@ -28,11 +28,11 @@ static int	print_placeholder(const char **format, va_list ap)
 		free(param);
 		return (-1);
 	}
-	chars_printed = print_param(param);
+	str_len = param->str_len;
 	*format = *format + param->placeholder_len;
 	free(param->str);
 	free(param);
-	return (chars_printed);
+	return (str_len);
 }
 
 void	run_printers(const char *format, va_list ap, int *total_chars)

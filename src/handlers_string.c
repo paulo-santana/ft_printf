@@ -12,6 +12,14 @@
 
 #include "libftprintf.h"
 
+static int	handle_flags(t_param *param)
+{
+	if (param->str_len < param->width)
+		if (fill_width(param) < 0)
+			return (-1);
+	return (param->str_len);
+}
+
 void	handle_string(t_param *param, va_list ap)
 {
 	char	*str_param;
@@ -24,4 +32,6 @@ void	handle_string(t_param *param, va_list ap)
 		param->str = ft_substr(str_param, 0, param->precision);
 	else
 		param->str = ft_strdup(str_param);
+	param->str_len = ft_strlen(param->str);
+	handle_flags(param);
 }

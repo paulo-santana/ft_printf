@@ -53,7 +53,7 @@ fclean: clean
 	${RM} ${NAME}
 
 run:
-	cd ./ft_printf_tester && sh test nosan m
+	cd ./ft_printf_tester && sh test
 
 re: fclean all
 

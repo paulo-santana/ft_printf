@@ -48,13 +48,12 @@ static int	fill_char_width(t_param *param)
 	return (1);
 }
 
-int	print_char(t_param *param)
+static int	handle_flags(t_param *param)
 {
 	param->str_len = 1;
 	if (param->width > 1)
 		if (fill_char_width(param) < 0)
 			return (-1);
-	write(1, param->str, param->str_len);
 	return (param->str_len);
 }
 
@@ -62,5 +61,6 @@ void	handle_char(t_param *param, va_list ap)
 {
 	param->specifier = 'c';
 	param->str = char_to_str(va_arg(ap, int));
-	param->str_len = 1;
+	if (handle_flags(param) == -1)
+		param->error = 1;
 }

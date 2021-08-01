@@ -30,8 +30,19 @@ static char	*int_to_pointer(size_t nbr)
 	return (address);
 }
 
+static int	handle_flags(t_param *param)
+{
+	if (param->str_len < param->width)
+		if (fill_width(param) < 0)
+			return (-1);
+	return (param->str_len);
+}
+
 void	handle_pointer(t_param *param, va_list ap)
 {
 	param->specifier = 'p';
 	param->str = int_to_pointer(va_arg(ap, size_t));
+	param->str_len = ft_strlen(param->str);
+	if (handle_flags(param) == -1)
+		param->error = 1;
 }

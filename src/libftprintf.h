@@ -55,7 +55,7 @@ int		fill_int_width(t_param *param);
 void	prefix_positive(t_param *param);
 int		print_param(t_param *param);
 int		print_char(t_param *param);
-int		print_int(t_param *param);
+int		handle_flags_int(t_param *param);
 int		print_inti(t_param *param);
 int		print_intu(t_param *param);
 int		print_hex(t_param *param);
