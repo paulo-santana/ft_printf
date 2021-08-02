@@ -38,20 +38,3 @@ int	fill_width(t_param *param)
 	param->str_len = param->width;
 	return (1);
 }
-
-int	print_param(t_param *param)
-{
-	if (param->specifier == 'b')
-		return (handle_flags_int(param));
-	if (param->specifier == 'd')
-		return (handle_flags_int(param));
-	if (param->specifier == 'u')
-		return (print_intu(param));
-	if (param->specifier == '%')
-		return (print_percent(param));
-	if (param->str_len < param->width)
-		if (fill_width(param) < 0)
-			return (-1);
-	write (1, param->str, param->str_len);
-	return (param->str_len);
-}

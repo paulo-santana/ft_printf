@@ -34,31 +34,37 @@ struct s_param
 	int		error;
 };
 
+struct s_output {
+	int		size;
+	char	*str;
+};
+
+typedef struct s_output	t_output;
 typedef struct s_param	t_param;
 
-t_param	*get_data(const char *str, va_list ap);
-void	get_str(char converter, t_param *param, va_list ap);
-void	handle_binary(t_param *param, va_list ap);
-void	handle_char(t_param *param, va_list ap);
-void	handle_string(t_param *param, va_list ap);
-void	handle_pointer(t_param *param, va_list ap);
-void	handle_intd(t_param *param, va_list ap);
-void	handle_inti(t_param *param, va_list ap);
-void	handle_intu(t_param *param, va_list ap);
-void	handle_hex(t_param *param, va_list ap);
-void	handle_hex_upper(t_param *param, va_list ap);
-void	handle_percentage(t_param *param);
+t_param		*get_data(const char *str, va_list ap);
+t_output	*generate_output(char *format, va_list ap);
 
-// output functions
-int		fill_width(t_param *param);
-int		fill_int_width(t_param *param);
-void	prefix_positive(t_param *param);
-int		print_param(t_param *param);
-int		print_char(t_param *param);
-int		handle_flags_int(t_param *param);
-int		print_inti(t_param *param);
-int		print_intu(t_param *param);
-int		print_hex(t_param *param);
-int		print_percent(t_param *param);
+void		get_str(char converter, t_param *param, va_list ap);
+void		handle_binary(t_param *param, va_list ap);
+void		handle_char(t_param *param, va_list ap);
+void		handle_string(t_param *param, va_list ap);
+void		handle_pointer(t_param *param, va_list ap);
+void		handle_intd(t_param *param, va_list ap);
+void		handle_inti(t_param *param, va_list ap);
+void		handle_intu(t_param *param, va_list ap);
+void		handle_hex(t_param *param, va_list ap);
+void		handle_hex_upper(t_param *param, va_list ap);
+void		handle_percentage(t_param *param);
+
+// formating functions
+int			fill_width(t_param *param);
+void		prefix_positive(t_param *param);
+
+/**
+ * Common functiond that handle flags for integer-like specifiers
+ */
+int			handle_flags_int(t_param *param);
+int			fill_int_width(t_param *param);
 
 #endif
