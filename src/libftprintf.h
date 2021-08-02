@@ -67,4 +67,9 @@ void		prefix_positive(t_param *param);
 int			handle_flags_int(t_param *param);
 int			fill_int_width(t_param *param);
 
+int			ft_printf(const char *format, ...);
+int			ft_vprintf(const char *format, va_list ap);
+int			ft_dprintf(int fd, const char *format, ...);
+int			ft_vdprintf(int fd, const char *format, va_list ap);
+
 #endif
