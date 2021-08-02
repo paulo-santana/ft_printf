@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft.h"
 
 void	handle_binary(t_param *param, va_list ap)
 {
@@ -25,4 +24,5 @@ void	handle_binary(t_param *param, va_list ap)
 		param->hash = 0;
 	param->str = ft_stoa_base(nbr, "01");
 	param->str_len = ft_strlen(param->str);
+	handle_flags_int(param);
 }
