@@ -7,7 +7,7 @@ HEADERS_DIR = ./src
 LIBFT_DIR = libft
 LIBFT = ${LIBFT_DIR}/libft.a
 
-SRCS_FILES = ft_printf.c ft_dprintf.c core.c \
+SRCS_FILES = ft_printf.c ft_dprintf.c ft_sprintf.c ft_snprintf.c core.c \
 			 parsers.c specifiers.c output.c handlers_string.c \
 			 handlers_char.c handlers_pointer.c handlers_intd.c \
 			 handlers_inti.c handlers_intu.c handlers_hex.c \
