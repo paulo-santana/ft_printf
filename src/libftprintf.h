@@ -75,5 +75,7 @@ int			ft_sprintf(char *buf, const char *format, ...);
 int			ft_vsprintf(char *buf, const char *format, va_list ap);
 int			ft_snprintf(char *buf, size_t n, const char *format, ...);
 int			ft_vsnprintf(char *buf, size_t n, const char *format, va_list ap);
+int			ft_asprintf(char **str, const char *format, ...);
+int			ft_vasprintf(char **str, const char *format, va_list ap);
 
 #endif

@@ -30,7 +30,7 @@ int	join_param(t_output *output, char **format, va_list ap)
 		output->size = -1;
 		return (-1);
 	}
-	tmp = ft_memjoin(output->str, output->size, param->str, param->str_len);
+	tmp = ft_memjoin(output->str, output->size, param->str, param->str_len + 1);
 	free(output->str);
 	output->str = tmp;
 	output->size += param->str_len;
@@ -60,7 +60,7 @@ int	append_text(t_output *output, char **format)
 	sub_str = ft_substr(text, 0, size);
 	*format = tmp_str;
 	tmp_str = output->str;
-	output->str = ft_memjoin(output->str, output->size, sub_str, size);
+	output->str = ft_memjoin(output->str, output->size, sub_str, size + 1);
 	output->size += size;
 	free(tmp_str);
 	free(sub_str);
