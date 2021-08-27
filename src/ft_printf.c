@@ -29,5 +29,5 @@ int	ft_printf(const char *format, ...)
 	va_start(ap, format);
 	chars_printed = ft_vprintf(format, ap);
 	va_end(ap);
-	return (chars_printed - 1);
+	return (chars_printed);
 }
