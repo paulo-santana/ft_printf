@@ -41,7 +41,6 @@ CC = gcc ${CFLAGS}
 all: ${NAME}
 
 ${NAME}: ${LIBFT} ${OBJS}
-	cp ${LIBFT} ${NAME}
 	${AR} rcs ${NAME} ${OBJS}
 
 ${LIBFT}:

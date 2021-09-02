@@ -1,9 +1,0 @@
-*.o
-*.out
-libft.a
-libftTester
-tester
-unit
-war-machine
-main.c
-libft-war-machine/
